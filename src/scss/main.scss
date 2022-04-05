@@ -317,10 +317,6 @@ main {
     height: 4px;
     width: 60px;
     background: var(--text-grey);
-
-    &.active {
-      background: var(--background-text-black);
-    }
   }
 }
 
@@ -348,8 +344,7 @@ main {
     margin: 0 auto;
   }
 
-  &.checked,
-  &.primary {
+  &.checked {
     .circle-container {
       background: var(--background-text-black);
       border: 1px solid var(--background-text-black);

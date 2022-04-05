@@ -9,33 +9,29 @@ const prevBtn = document.querySelector("#btn-prev")
 const cartPanel = document.querySelector('.main-cart-list')
 
 let step = 0
-let line = 1
 
 function handleBtnControlClicked(event) {
-  event.preventDefault(); //取消瀏覽器預設值
-  const nowStep = steps[step];
-  const nextLine = lines[line];
+  event.preventDefault() //取消瀏覽器預設值
+  const nowStep = steps[step]
   if (
     event.target.matches(".btn-primary")
   ) {
-    const nextStep = steps[step + 1];
-    nowStep.classList.remove("primary");
-    nowStep.classList.remove("active");
-    nowStep.classList.add("checked");
-    nextStep.classList.add("active");
-    nextLine.classList.add("active");
-    formParts[step].classList.toggle("d-none");
-    formParts[step + 1].classList.toggle("d-none");
+    const nextStep = steps[step + 1]
+    nowStep.classList.remove("primary")
+    nowStep.classList.remove("active")
+    nowStep.classList.add("checked")
+    nextStep.classList.add("active")
+    formParts[step].classList.toggle("d-none")
+    formParts[step + 1].classList.toggle("d-none")
     step += 1;
   } else if (event.target.matches(".btn-outline")) {
-    const prevStep = steps[step - 1];
-    nowStep.classList.remove("active");
-    nowStep.classList.remove("checked");
-    prevStep.classList.remove("checked");
-    prevStep.classList.add("active");
-    nextLine.classList.remove("active");
-    formParts[step].classList.toggle("d-none");
-    formParts[step - 1].classList.toggle("d-none");
+    const prevStep = steps[step - 1]
+    nowStep.classList.remove("active")
+    nowStep.classList.remove("checked")
+    prevStep.classList.remove("checked")
+    prevStep.classList.add("active")
+    formParts[step].classList.toggle("d-none")
+    formParts[step - 1].classList.toggle("d-none")
     step -= 1;
   }
   setBtnDisabled()
