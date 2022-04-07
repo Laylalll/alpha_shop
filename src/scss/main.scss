@@ -97,11 +97,11 @@ h1 {
 }
 
 h2 {
-  font-size: 0.875rem; //14
+  font-size: 1.25rem;
 }
 
 h3 {
-  font-size: 0.75rem; //12
+  font-size: 1.05rem;
 }
 
 $sizes: (25: 25%,
@@ -169,10 +169,10 @@ $abbrev in (margin: m, padding: p) {
 }
 
 %input-style {
-  border: 1px solid var(--text-grey);
+  border: 3px solid var(--text-grey);
   border-radius: 5px;
   font-size: var(--font-size-description);
-  padding: 0.5em;
+  padding: 1em;
 
   &:hover,
   &:focus {
@@ -182,6 +182,11 @@ $abbrev in (margin: m, padding: p) {
 
 .d-none {
   display: none;
+}
+
+.v-hidden {
+  visibility: hidden;
+  position: absolute;
 }
 
 .d-flex {
@@ -421,12 +426,13 @@ main {
   .form-item-delivery {
     flex-direction: row;
     align-items: center;
-    border: 1px solid var(--text-grey);
+    border: 3px solid var(--text-grey);
     border-radius: 5px;
     position: relative;
 
+    &.active,
     &:hover {
-      border: 1px solid var(--background-text-black);
+      border: 3px solid var(--background-text-black);
     }
 
     >input {
@@ -454,9 +460,14 @@ main {
       -webkit-appearance: none;
       border-radius: 50%;
       border-color: var(--background-text-black);
+      padding: 0.5em;
       cursor: pointer;
 
       &:checked {
+        box-shadow: inset 0 0 0 3.5px var(--background-text-black);
+      }
+
+      &.active {
         box-shadow: inset 0 0 0 3.5px var(--background-text-black);
       }
     }
@@ -503,8 +514,10 @@ main {
 // button
 .control-panel {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+
+  position: relative;
 }
 
 .btn {
@@ -531,6 +544,10 @@ main {
     color: var(--background-text-black);
     font-size: var(--font-size-description);
     cursor: pointer;
+
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
@@ -585,6 +602,16 @@ main {
 // PC style
 @media screen and (min-width: 375px) {
 
+  #main-app {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  // nav
+  nav {
+    width: 85%;
+  }
+
   // nav
   .nav-wrapper {
     width: 90%;
@@ -632,7 +659,7 @@ main {
   }
 
   .nav-list-function {
-    width: 15%;
+    width: 11%;
   }
 
   // nav mobile menu icon
@@ -647,13 +674,12 @@ main {
 
   .main-wrapper {
     height: 450px;
-    display: flex;
-    flex-direction: column;
     position: relative;
   }
 
   .main-left {
-    width: 60%;
+    width: 52%;
+    height: 100%;
   }
 
   .main-cart {
@@ -661,10 +687,11 @@ main {
     top: 0;
     bottom: 0;
     right: 0;
+    width: 400px;
   }
 
   .control-panel {
-    width: 60%;
+    width: 52%;
     flex: 1;
     align-items: flex-end;
   }
@@ -679,10 +706,6 @@ main {
       flex-direction: column;
     }
 
-    .form-item-delivery {
-      flex-direction: row;
-    }
-
     .form-item-gender,
     .form-item-location {
       width: 40%;
@@ -695,6 +718,20 @@ main {
 
     .form-item-mobile,
     .form-item-email {
+      width: 50%;
+    }
+
+    .form-item-delivery {
+      flex-direction: row;
+    }
+
+    .form-item-card-owner,
+    .form-item-card-number {
+      width: 70%;
+    }
+
+    .form-item-card-date,
+    .form-item-card-code {
       width: 50%;
     }
 
@@ -715,4 +752,17 @@ main {
       display: block;
     }
   }
+
+  // button
+  .control-panel {
+    justify-content: flex-end;
+  }
+
+  .btn {
+    &.btn-primary {
+      width: 25%;
+    }
+  }
+
+
 }

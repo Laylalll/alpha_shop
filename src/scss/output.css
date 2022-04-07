@@ -96,11 +96,11 @@ h1 {
 }
 
 h2 {
-  font-size: 0.875rem;
+  font-size: 1.25rem;
 }
 
 h3 {
-  font-size: 0.75rem;
+  font-size: 1.05rem;
 }
 
 .w-25 {
@@ -676,10 +676,10 @@ h3 {
 }
 
 .form-group select, .form-group input {
-  border: 1px solid var(--text-grey);
+  border: 3px solid var(--text-grey);
   border-radius: 5px;
   font-size: var(--font-size-description);
-  padding: 0.5em;
+  padding: 1em;
 }
 .form-group select:hover, .form-group input:hover, .form-group select:focus, .form-group input:focus {
   border-color: var(--border-blue);
@@ -687,6 +687,11 @@ h3 {
 
 .d-none {
   display: none;
+}
+
+.v-hidden {
+  visibility: hidden;
+  position: absolute;
 }
 
 .d-flex {
@@ -815,9 +820,6 @@ main {
   width: 60px;
   background: var(--text-grey);
 }
-.main-stepper-wrapper .connect-line.active {
-  background: var(--background-text-black);
-}
 
 .step {
   text-align: center;
@@ -839,7 +841,7 @@ main {
   color: var(--text-grey);
   margin: 0 auto;
 }
-.step.checked .circle-container, .step.primary .circle-container {
+.step.checked .circle-container {
   background: var(--background-text-black);
   border: 1px solid var(--background-text-black);
   color: var(--background-text-white);
@@ -898,12 +900,12 @@ main {
 .form-group .form-item-delivery {
   flex-direction: row;
   align-items: center;
-  border: 1px solid var(--text-grey);
+  border: 3px solid var(--text-grey);
   border-radius: 5px;
   position: relative;
 }
-.form-group .form-item-delivery:hover {
-  border: 1px solid var(--background-text-black);
+.form-group .form-item-delivery.active, .form-group .form-item-delivery:hover {
+  border: 3px solid var(--background-text-black);
 }
 .form-group .form-item-delivery > input {
   margin: 0 20px;
@@ -923,9 +925,13 @@ main {
   -webkit-appearance: none;
   border-radius: 50%;
   border-color: var(--background-text-black);
+  padding: 0.5em;
   cursor: pointer;
 }
 .form-group input[type=radio]:checked {
+  box-shadow: inset 0 0 0 3.5px var(--background-text-black);
+}
+.form-group input[type=radio].active {
   box-shadow: inset 0 0 0 3.5px var(--background-text-black);
 }
 .form-group .input-card-date,
@@ -960,8 +966,9 @@ main {
 
 .control-panel {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  position: relative;
 }
 
 .btn.btn-primary {
@@ -984,6 +991,9 @@ main {
   color: var(--background-text-black);
   font-size: var(--font-size-description);
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .main-cart-wrapper {
@@ -1033,6 +1043,15 @@ main {
 }
 
 @media screen and (min-width: 375px) {
+  #main-app {
+    width: 85%;
+    margin: 0 auto;
+  }
+
+  nav {
+    width: 85%;
+  }
+
   .nav-wrapper {
     width: 90%;
     margin: 0 auto;
@@ -1078,7 +1097,7 @@ main {
   }
 
   .nav-list-function {
-    width: 15%;
+    width: 11%;
   }
 
   .nav-toggle-icon {
@@ -1091,13 +1110,12 @@ main {
 
   .main-wrapper {
     height: 450px;
-    display: flex;
-    flex-direction: column;
     position: relative;
   }
 
   .main-left {
-    width: 60%;
+    width: 52%;
+    height: 100%;
   }
 
   .main-cart {
@@ -1105,10 +1123,11 @@ main {
     top: 0;
     bottom: 0;
     right: 0;
+    width: 400px;
   }
 
   .control-panel {
-    width: 60%;
+    width: 52%;
     flex: 1;
     align-items: flex-end;
   }
@@ -1121,9 +1140,6 @@ main {
     margin-bottom: 24px;
     flex-direction: column;
   }
-  .form-group .form-item-delivery {
-    flex-direction: row;
-  }
   .form-group .form-item-gender,
 .form-group .form-item-location {
     width: 40%;
@@ -1134,6 +1150,17 @@ main {
   }
   .form-group .form-item-mobile,
 .form-group .form-item-email {
+    width: 50%;
+  }
+  .form-group .form-item-delivery {
+    flex-direction: row;
+  }
+  .form-group .form-item-card-owner,
+.form-group .form-item-card-number {
+    width: 70%;
+  }
+  .form-group .form-item-card-date,
+.form-group .form-item-card-code {
     width: 50%;
   }
   .form-group .input-mobile {
@@ -1148,6 +1175,14 @@ main {
   }
   .step .label-container {
     display: block;
+  }
+
+  .control-panel {
+    justify-content: flex-end;
+  }
+
+  .btn.btn-primary {
+    width: 25%;
   }
 }
 

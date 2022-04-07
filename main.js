@@ -7,8 +7,12 @@ const btnControl = document.querySelector("#btn-control")
 const nextBtn = document.querySelector("#btn-next")
 const prevBtn = document.querySelector("#btn-prev")
 const cartPanel = document.querySelector('.main-cart-list')
+const totalAmount = document.querySelector('#total-amount')
+const deliveryPanel = document.querySelector('.delivery')
+
 
 let step = 0
+let totalCalc = 5298
 
 function handleBtnControlClicked(event) {
   event.preventDefault() //取消瀏覽器預設值
@@ -34,15 +38,17 @@ function handleBtnControlClicked(event) {
     formParts[step - 1].classList.toggle("d-none")
     step -= 1;
   }
-  setBtnDisabled()
+  setBtnControl()
 }
 
-
-function setBtnDisabled() {
+function setBtnControl() {
   if (step === 0) {
-    prevBtn.setAttribute("disabled", "disabled");
+    prevBtn.classList.add('v-hidden')
+    nextBtn.classList.add('w-100')
   } else {
-    prevBtn.removeAttribute("disabled");
+    prevBtn.classList.remove('v-hidden')
+    nextBtn.classList.remove('w-100')
+    nextBtn.classList.add('w-20')
   }
 
   if (step === 2) {
@@ -52,26 +58,39 @@ function setBtnDisabled() {
   }
 }
 
+function deliveryControl(event) {
+  if (event.target.matches('.DHL')) {
+    event.target.parentElement.previousElementSibling.classList.toggle('active')
+    event.target.parentElement.previousElementSibling.children[0].classList.toggle('active')
+  }
+}
+
 function cartAmountCalc(event) {
+  const itemPrice = Number(event.target.parentElement.nextElementSibling.innerText)
+
   if (event.target.classList.contains("minus") || event.target.classList.contains("plus")) {
     let amountBox = event.target.parentElement.children[1]
     let amount = Number(amountBox.innerText)
 
     if (event.target.classList.contains("plus")) {
       amount += 1
+      totalCalc += itemPrice
+
     } else if (event.target.classList.contains("minus")) {
       amount -= 1
+      if (amount >= 0) {
+        totalCalc -= itemPrice
+      }
       if (amount < 0) {
         amount = 0
       }
     }
     amountBox.innerText = amount
+    totalAmount.innerText = totalCalc.toLocaleString('en-US')
   }
 }
 
-function cartTotalCalc() {
-
-}
 
 btnControl.addEventListener("click", handleBtnControlClicked)
+deliveryPanel.addEventListener("change", deliveryControl)
 cartPanel.addEventListener("click", cartAmountCalc)
